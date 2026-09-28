@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইউজি সিকিউরিটি সার্ভিস লিমিটেড - ড্যাশবোর্ড</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-64 bg-slate-900 text-white flex flex-col">
+            <div class="p-5 text-lg font-bold border-b border-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-shield-halved text-blue-500 text-xl"></i> 
+                <div>
+                    <span class="block text-sm text-blue-400 font-semibold">UG Security</span>
+                    <span class="text-xs text-slate-300">সার্ভিস লিমিটেড</span>
+                </div>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white font-medium transition">
+                    <i class="fa-solid fa-chart-pie"></i> ওভারভিউ ড্যাশবোর্ড
+                </button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 font-medium transition">
+                    <i class="fa-solid fa-building-shield"></i> প্রজেক্ট ও জনবল
+                </button>
+                <button onclick="switchTab('incidents')" id="nav-incidents" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 font-medium transition">
+                    <i class="fa-solid fa-triangle-exclamation"></i> ইনসিডেন্ট লগ
+                </button>
+            </nav>
+            <div class="p-4 border-t border-slate-800 text-xs text-slate-400">
+                মোট প্রজেক্ট: <span id="sidebar-proj-count" class="text-white font-bold">0</span> | জনবল: <span id="sidebar-staff-count" class="text-white font-bold">0</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Topbar -->
+            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-8 z-10">
+                <h1 id="page-title" class="text-xl font-bold text-slate-800">ওভারভিউ ড্যাশবোর্ড</h1>
+                <div class="flex items-center gap-4">
+                    <span class="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-medium border border-blue-200">
+                        <i class="fa-solid fa-circle text-green-500 text-xs mr-1"></i> ইউজি সিকিউরিটি লাইভ ড্যাশবোর্ড
+                    </span>
+                </div>
+            </header>
+
+            <!-- Content Body -->
+            <main class="p-8">
+                
+                <!-- TAB 1: DASHBOARD -->
+                <div id="tab-dashboard" class="space-y-6">
+                    <!-- Top Summary Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">মোট প্রজেক্ট</p>
+                                <h3 id="stat-projects" class="text-3xl font-bold text-slate-800 mt-1">0</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-building"></i></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">অন-ডিউটি জনবল</p>
+                                <h3 id="stat-onduty" class="text-3xl font-bold text-emerald-600 mt-1">0</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-check"></i></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">অনুমোদিত জনবল</p>
+                                <h3 id="stat-required" class="text-3xl font-bold text-blue-600 mt-1">0</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-users"></i></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">ঘাটতি (Shortage)</p>
+                                <h3 id="stat-shortage" class="text-3xl font-bold text-rose-600 mt-1">0</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-minus"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Category Breakdown -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-chart-simple mr-2 text-blue-600"></i>ক্যাটাগরিভিত্তিক জনবল ও ঘাটতি</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
+                                        <th class="p-3">ক্যাটাগরি</th>
+                                        <th class="p-3">অনুমোদিত</th>
+                                        <th class="p-3">অন-ডিউটি</th>
+                                        <th class="p-3">ঘাটতি</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="category-table-body" class="divide-y divide-gray-100 text-sm">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: PROJECTS & STAFF -->
+                <div id="tab-projects" class="hidden space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-lg font-bold text-slate-800">প্রজেক্ট ও স্টাফ ম্যানেজমেন্ট</h2>
+                        <div class="flex gap-3">
+                            <button onclick="openModal('projectModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-plus mr-2"></i>প্রজেক্ট যোগ করুন</button>
+                            <button onclick="openModal('staffModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-user-plus mr-2"></i>স্টাফ ডিউটি অ্যাসাইন</button>
+                        </div>
+                    </div>
+
+                    <!-- Project List Cards -->
+                    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Dynamic Project Cards -->
+                    </div>
+                </div>
+
+                <!-- TAB 3: INCIDENTS -->
+                <div id="tab-incidents" class="hidden space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-lg font-bold text-slate-800">সিকিউরিটি ইনসিডেন্ট ও ঘটনা লগ</h2>
+                        <button onclick="openModal('incidentModal')" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-triangle-exclamation mr-2"></i>নতুন ইনসিডেন্ট রিপোর্ট</button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
+                                    <th class="p-4">তারিখ ও সময়</th>
+                                    <th class="p-4">প্রজেক্টের নাম</th>
+                                    <th class="p-4">ঘটনার বিবরণ</th>
+                                    <th class="p-4">রিপোর্টার</th>
+                                    <th class="p-4">স্ট্যাটাস</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incidents-table-body" class="divide-y divide-gray-100 text-sm">
+                                <!-- Dynamic Incidents -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL: Add Project -->
+    <div id="projectModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg">নতুন প্রজেক্ট যোগ করুন</h3>
+                <button onclick="closeModal('projectModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="handleSaveProject(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্টের নাম (যেমন: উসিমার্ট মিরপুর)</label>
+                    <input type="text" id="projName" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">লোকেশন</label>
+                    <input type="text" id="projLocation" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রয়োজনীয় মোট জনবল (Required Manpower)</label>
+                    <input type="number" id="projReqCount" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex justify-end gap-3 pt-3 border-t">
+                    <button type="button" onclick="closeModal('projectModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">সংরক্ষণ করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Add Staff -->
+    <div id="staffModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg">ডিউটিতে স্টাফ অ্যাসাইন করুন</h3>
+                <button onclick="closeModal('staffModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="handleSaveStaff(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্ট সিলেক্ট করুন</label>
+                    <select id="staffProject" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">স্টাফের নাম</label>
+                        <input type="text" id="staffName" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">স্টাফ আইডি (ID)</label>
+                        <input type="text" id="staffId" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ফোন নম্বর</label>
+                        <input type="text" id="staffPhone" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ক্যাটাগরি</label>
+                        <select id="staffCategory" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="সিকিউরিটি গার্ড">সিকিউরিটি গার্ড</option>
+                            <option value="ফিমেল সিকিউরিটি গার্ড">ফিমেল সিকিউরিটি গার্ড</option>
+                            <option value="সিভিল গার্ড">সিভিল গার্ড</option>
+                            <option value="ডগ স্কোয়াড">ডগ স্কোয়াড</option>
+                            <option value="সিসিটিভি অপারেটর">সিসিটিভি অপারেটর</option>
+                            <option value="টেকনিশিয়ান">টেকনিশিয়ান</option>
+                            <option value="সিকিউরিটি সুপারভাইজার">সিকিউরিটি সুপারভাইজার</option>
+                            <option value="এক্সিকিউটিভ">এক্সিকিউটিভ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 pt-3 border-t">
+                    <button type="button" onclick="closeModal('staffModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">অ্যাসাইন করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Add Incident -->
+    <div id="incidentModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg">নতুন ইনসিডেন্ট রিপোর্ট করুন</h3>
+                <button onclick="closeModal('incidentModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="handleSaveIncident(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্ট সিলেক্ট করুন</label>
+                    <select id="incidentProject" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ঘটনার বিবরণ (Incident Details)</label>
+                    <textarea id="incidentDesc" rows="3" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">রিপোর্টার নাম ও পদবী</label>
+                    <input type="text" id="incidentReporter" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex justify-end gap-3 pt-3 border-t">
+                    <button type="button" onclick="closeModal('incidentModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-medium">সাবমিট করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const categories = [
+            "সিকিউরিটি গার্ড",
+            "ফিমেল সিকিউরিটি গার্ড",
+            "সিভিল গার্ড",
+            "ডগ স্কোয়াড",
+            "সিসিটিভি অপারেটর",
+            "টেকনিশিয়ান",
+            "সিকিউরিটি সুপারভাইজার",
+            "এক্সিকিউটিভ"
+        ];
+
+        let projects = JSON.parse(localStorage.getItem('ug_sec_projects')) || [
+            { id: 1, name: "ওয়ারী ইউনিমার্ট", location: "ওয়ারী", required: 30 },
+            { id: 2, name: "মিরপুর ইউনিমার্ট মেট্রো", location: "মিরপুর", required: 25 },
+            { id: 3, name: "শেফস টেবল ও কোর্টসাইড", location: "গুলশান", required: 20 }
+        ];
+
+        let staffList = JSON.parse(localStorage.getItem('ug_sec_staff')) || [
+            { id: "UG-101", name: "রহিম উদ্দিন", phone: "01711223344", category: "সিকিউরিটি গার্ড", projectName: "ওয়ারী ইউনিমার্ট" },
+            { id: "UG-102", name: "করিম মিয়া", phone: "01811223344", category: "সিকিউরিটি সুপারভাইজার", projectName: "ওয়ারী ইউনিমার্ট" },
+            { id: "UG-103", name: "সাজেদা বেগম", phone: "01911223344", category: "ফিমেল সিকিউরিটি গার্ড", projectName: "মিরপুর ইউনিমার্ট মেট্রো" }
+        ];
+
+        let incidents = JSON.parse(localStorage.getItem('ug_sec_incidents')) || [
+            { date: "2026-06-06 14:30", project: "ওয়ারী ইউনিমার্ট", desc: "সামান্য শৃঙ্খলা সংক্রান্ত বিষয় ছিল, সমাধান করা হয়েছে।", reporter: "করিম মিয়া (সুপারভাইজার)", status: "সমাধানকৃত" }
+        ];
+
+        function switchTab(tabId) {
+            ['dashboard', 'projects', 'incidents'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`nav-${t}`).classList.remove('bg-blue-600', 'text-white');
+                document.getElementById(`nav-${t}`).classList.add('hover:bg-slate-800', 'text-slate-300');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).classList.remove('hover:bg-slate-800', 'text-slate-300');
+            document.getElementById(`nav-${tabId}`).classList.add('bg-blue-600', 'text-white');
+
+            const titles = { 'dashboard': 'ওভারভিউ ড্যাশবোর্ড', 'projects': 'প্রজেক্ট ও জনবল', 'incidents': 'ইনসিডেন্ট লগ' };
+            document.getElementById('page-title').innerText = titles[tabId];
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById(modalId).classList.add('flex');
+            populateProjectDropdowns();
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        function populateProjectDropdowns() {
+            const selects = ['staffProject', 'incidentProject'];
+            selects.forEach(selId => {
+                const el = document.getElementById(selId);
+                if(el) {
+                    el.innerHTML = projects.map(p => `<option value="${p.name}">${p.name} (${p.location})</option>`).join('');
+                }
+            });
+        }
+
+        function handleSaveProject(e) {
+            e.preventDefault();
+            const name = document.getElementById('projName').value;
+            const location = document.getElementById('projLocation').value;
+            const required = parseInt(document.getElementById('projReqCount').value);
+
+            projects.push({ id: Date.now(), name, location, required });
+            localStorage.setItem('ug_sec_projects', JSON.stringify(projects));
+            closeModal('projectModal');
+            e.target.reset();
+            renderAll();
+        }
+
+        function handleSaveStaff(e) {
+            e.preventDefault();
+            const staff = {
+                id: document.getElementById('staffId').value,
+                name: document.getElementById('staffName').value,
+                phone: document.getElementById('staffPhone').value,
+                category: document.getElementById('staffCategory').value,
+                projectName: document.getElementById('staffProject').value
+            };
+            staffList.push(staff);
+            localStorage.setItem('ug_sec_staff', JSON.stringify(staffList));
+            closeModal('staffModal');
+            e.target.reset();
+            renderAll();
+        }
+
+        function handleSaveIncident(e) {
+            e.preventDefault();
+            const now = new Date().toISOString().slice(0, 16).replace('T', ' ');
+            const incident = {
+                date: now,
+                project: document.getElementById('incidentProject').value,
+                desc: document.getElementById('incidentDesc').value,
+                reporter: document.getElementById('incidentReporter').value,
+                status: "অমীমাংসিত/নজরদারিতে"
+            };
+            incidents.push(incident);
+            localStorage.setItem('ug_sec_incidents', JSON.stringify(incidents));
+            closeModal('incidentModal');
+            e.target.reset();
+            renderAll();
+        }
+
+        function deleteStaff(staffId) {
+            staffList = staffList.filter(s => s.id !== staffId);
+            localStorage.setItem('ug_sec_staff', JSON.stringify(staffList));
+            renderAll();
+        }
+
+        function deleteProject(projId) {
+            projects = projects.filter(p => p.id !== projId);
+            localStorage.setItem('ug_sec_projects', JSON.stringify(projects));
+            renderAll();
+        }
+
+        function renderAll() {
+            const totalProj = projects.length;
+            const totalOnDuty = staffList.length;
+            const totalRequired = projects.reduce((sum, p) => sum + p.required, 0);
+            const totalShortage = Math.max(0, totalRequired - totalOnDuty);
+
+            document.getElementById('stat-projects').innerText = totalProj;
+            document.getElementById('stat-onduty').innerText = totalOnDuty;
+            document.getElementById('stat-required').innerText = totalRequired;
+            document.getElementById('stat-shortage').innerText = totalShortage;
+            
+            document.getElementById('sidebar-proj-count').innerText = totalProj;
+            document.getElementById('sidebar-staff-count').innerText = totalOnDuty;
+
+            const catTable = document.getElementById('category-table-body');
+            catTable.innerHTML = categories.map(cat => {
+                const reqForCat = Math.round(totalRequired / categories.length); 
+                const onDutyCat = staffList.filter(s => s.category === cat).length;
+                const shortageCat = Math.max(0, reqForCat - onDutyCat);
+                return `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-3 font-medium text-slate-700">${cat}</td>
+                        <td class="p-3 text-blue-600 font-semibold">${reqForCat}</td>
+                        <td class="p-3 text-emerald-600 font-semibold">${onDutyCat}</td>
+                        <td class="p-3 text-rose-600 font-semibold">${shortageCat}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            const projGrid = document.getElementById('projects-grid');
+            projGrid.innerHTML = projects.map(p => {
+                const pStaff = staffList.filter(s => s.projectName === p.name);
+                const shortage = Math.max(0, p.required - pStaff.length);
+                return `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">${p.name}</h3>
+                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot mr-1"></i>${p.location}</p>
+                            </div>
+                            <button onclick="deleteProject(${p.id})" class="text-gray-400 hover:text-rose-600 text-sm"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 bg-gray-50 p-3 rounded-lg text-center text-xs">
+                            <div>
+                                <span class="text-gray-500 block">প্রয়োজনীয়</span>
+                                <span class="font-bold text-blue-600 text-base">${p.required}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block">অন-ডিউটি</span>
+                                <span class="font-bold text-emerald-600 text-base">${pStaff.length}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block">ঘাটতি</span>
+                                <span class="font-bold text-rose-600 text-base">${shortage}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">ডিউটিরত স্টাফ তালিকা:</h4>
+                            <div class="space-y-2 max-h-40 overflow-y-auto pr-1">
+                                ${pStaff.length === 0 ? '<p class="text-xs text-gray-400 italic">কোনো স্টাফ অ্যাসাইন করা নেই</p>' : 
+                                    pStaff.map(s => `
+                                        <div class="flex justify-between items-center bg-gray-50 p-2 rounded text-xs border border-gray-100">
+                                            <div>
+                                                <p class="font-semibold text-slate-800">${s.name} <span class="text-gray-400 font-normal">(${s.id})</span></p>
+                                                <p class="text-gray-500">${s.category} • <i class="fa-solid fa-phone text-[10px]"></i> ${s.phone}</p>
+                                            </div>
+                                            <button onclick="deleteStaff('${s.id}')" class="text-rose-500 hover:text-rose-700 px-1"><i class="fa-solid fa-xmark"></i></button>
+                                        </div>
+                                    `).join('')
+                                }
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const incTable = document.getElementById('incidents-table-body');
+            incTable.innerHTML = incidents.length === 0 ? `<tr><td colspan="5" class="p-4 text-center text-gray-400">কোনো ইনসিডেন্ট রেকর্ড পাওয়া যায়নি</td></tr>` :
+                incidents.map(i => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 text-gray-500 text-xs">${i.date}</td>
+                        <td class="p-4 font-semibold text-slate-800">${i.project}</td>
+                        <td class="p-4 text-gray-700">${i.desc}</td>
+                        <td class="p-4 text-gray-600 text-xs">${i.reporter}</td>
+                        <td class="p-4"><span class="bg-amber-50 text-amber-700 px-2 py-1 rounded text-xs font-medium border border-amber-200">${i.status}</span></td>
+                    </tr>
+                `).join('');
+        }
+
+        renderAll();
+    </script>
+</body>
+</html>
