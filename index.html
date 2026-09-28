@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইউজি সিকিউরিটি সার্ভিস লিমিটেড - ড্যাশবোর্ড</title>
+    <title>UG Security Services Ltd. - Enterprise Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
@@ -13,104 +13,113 @@
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-slate-50 text-slate-800">
 
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div class="w-64 bg-slate-900 text-white flex flex-col">
-            <div class="p-5 text-lg font-bold border-b border-slate-800 flex items-center gap-3">
-                <i class="fa-solid fa-shield-halved text-blue-500 text-xl"></i> 
+        <div class="w-72 bg-slate-900 text-white flex flex-col shadow-xl z-20">
+            <!-- Brand Logo & Top -->
+            <div class="p-5 border-b border-slate-800 flex items-center gap-3 bg-slate-950/50">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-white text-xl">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
                 <div>
-                    <span class="block text-sm text-blue-400 font-semibold">UG Security</span>
-                    <span class="text-xs text-slate-300">সার্ভিস লিমিটেড</span>
+                    <h2 class="font-bold text-sm tracking-wide text-white">UG SECURITY</h2>
+                    <span class="text-[11px] text-blue-400 font-medium">Services Ltd. Dashboard</span>
                 </div>
             </div>
-            <nav class="flex-1 p-4 space-y-2">
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white font-medium transition">
-                    <i class="fa-solid fa-chart-pie"></i> ওভারভিউ ড্যাশবোর্ড
+
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 text-white font-medium transition shadow-lg shadow-blue-600/20">
+                    <i class="fa-solid fa-chart-pie w-5"></i> ওভারভিউ ড্যাশবোর্ড
                 </button>
-                <button onclick="switchTab('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 font-medium transition">
-                    <i class="fa-solid fa-building-shield"></i> প্রজেক্ট ও জনবল
+                <button onclick="switchTab('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/80 text-slate-300 font-medium transition">
+                    <i class="fa-solid fa-building-shield w-5"></i> প্রজেক্ট ও জনবল
                 </button>
-                <button onclick="switchTab('incidents')" id="nav-incidents" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 font-medium transition">
-                    <i class="fa-solid fa-triangle-exclamation"></i> ইনসিডেন্ট লগ
+                <button onclick="switchTab('incidents')" id="nav-incidents" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/80 text-slate-300 font-medium transition">
+                    <i class="fa-solid fa-triangle-exclamation w-5"></i> ইনসিডেন্ট লগ
                 </button>
             </nav>
-            <div class="p-4 border-t border-slate-800 text-xs text-slate-400">
-                মোট প্রজেক্ট: <span id="sidebar-proj-count" class="text-white font-bold">0</span> | জনবল: <span id="sidebar-staff-count" class="text-white font-bold">0</span>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-950/30 text-xs text-slate-400 flex justify-between items-center">
+                <span>মোট প্রজেক্ট: <strong id="sidebar-proj-count" class="text-white">0</strong></span>
+                <span>অন-ডিউটি: <strong id="sidebar-staff-count" class="text-white">0</strong></span>
             </div>
         </div>
 
-        <!-- Main Content -->
+        <!-- Main Area -->
         <div class="flex-1 flex flex-col overflow-y-auto">
-            <!-- Topbar -->
-            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-8 z-10">
-                <h1 id="page-title" class="text-xl font-bold text-slate-800">ওভারভিউ ড্যাশবোর্ড</h1>
+            <!-- Top Header -->
+            <header class="bg-white border-b border-slate-200 h-20 flex items-center justify-between px-8 shadow-sm z-10">
                 <div class="flex items-center gap-4">
-                    <span class="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-medium border border-blue-200">
-                        <i class="fa-solid fa-circle text-green-500 text-xs mr-1"></i> ইউজি সিকিউরিটি লাইভ ড্যাশবোর্ড
+                    <div class="text-blue-600 text-2xl bg-blue-50 p-2.5 rounded-xl border border-blue-100"><i class="fa-solid fa-building-columns"></i></div>
+                    <div>
+                        <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">UG Security Services Ltd.</h1>
+                        <p id="page-title" class="text-xs text-slate-500 font-medium mt-0.5">রিয়েল-টাইম সিকিউরিটি মনিটরিং ও জনবল ব্যবস্থাপনা সিস্টেম</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs bg-emerald-50 text-emerald-700 px-3.5 py-1.5 rounded-full font-semibold border border-emerald-200 flex items-center gap-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> লাইভ সিস্টেম আপডেট
                     </span>
                 </div>
             </header>
 
-            <!-- Content Body -->
-            <main class="p-8">
+            <!-- Main Content Container -->
+            <main class="p-8 space-y-6">
                 
                 <!-- TAB 1: DASHBOARD -->
                 <div id="tab-dashboard" class="space-y-6">
-                    <!-- Top Summary Cards -->
+                    <!-- Stat Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500 font-medium">মোট প্রজেক্ট</p>
-                                <h3 id="stat-projects" class="text-3xl font-bold text-slate-800 mt-1">0</h3>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">মোট প্রজেক্ট</p>
+                                <h3 id="stat-projects" class="text-3xl font-black text-slate-900 mt-1">0</h3>
                             </div>
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-building"></i></div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-building"></i></div>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500 font-medium">অন-ডিউটি জনবল</p>
-                                <h3 id="stat-onduty" class="text-3xl font-bold text-emerald-600 mt-1">0</h3>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">অন-ডিউটি জনবল</p>
+                                <h3 id="stat-onduty" class="text-3xl font-black text-emerald-600 mt-1">0</h3>
                             </div>
-                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-check"></i></div>
+                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-check"></i></div>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500 font-medium">অনুমোদিত জনবল</p>
-                                <h3 id="stat-required" class="text-3xl font-bold text-blue-600 mt-1">0</h3>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">অনুমোদিত জনবল</p>
+                                <h3 id="stat-required" class="text-3xl font-black text-blue-600 mt-1">0</h3>
                             </div>
-                            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-users"></i></div>
+                            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-users"></i></div>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500 font-medium">ঘাটতি (Shortage)</p>
-                                <h3 id="stat-shortage" class="text-3xl font-bold text-rose-600 mt-1">0</h3>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">ঘাটতি (Shortage)</p>
+                                <h3 id="stat-shortage" class="text-3xl font-black text-rose-600 mt-1">0</h3>
                             </div>
-                            <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-minus"></i></div>
+                            <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-minus"></i></div>
                         </div>
                     </div>
 
-                    <!-- Project Summary Table with Click Detail -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-list-check mr-2 text-blue-600"></i>প্রজেক্টভিত্তিক জনবল ও ঘাটতি তালিকা</h3>
-                            <p class="text-xs text-gray-500 italic">* বিস্তারিত দেখতে প্রজেক্টের নামের উপর ক্লিক করুন</p>
+                    <!-- Project Table Summary -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2"><i class="fa-solid fa-list-check text-blue-600"></i>সকল প্রজেক্টের জনবল ও ঘাটতি বিবরণী</h3>
+                            <span class="text-xs text-slate-400 italic">বিস্তারিত দেখতে প্রজেক্টের নামের উপর ক্লিক করুন</span>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
-                                        <th class="p-3">প্রজেক্টের নাম</th>
-                                        <th class="p-3">লোকেশন</th>
-                                        <th class="p-3">অনুমোদিত জনবল</th>
-                                        <th class="p-3">বর্তমান অন-ডিউটি</th>
-                                        <th class="p-3">ঘাটতি (Shortage)</th>
-                                        <th class="p-3 text-center">অ্যাকশন</th>
+                                    <tr class="bg-slate-50 text-slate-500 uppercase text-[11px] tracking-wider border-b border-slate-200">
+                                        <th class="p-3.5">প্রজেক্ট / প্রতিষ্ঠানের নাম</th>
+                                        <th class="p-3.5">অনুমোদিত</th>
+                                        <th class="p-3.5">অন-ডিউটি</th>
+                                        <th class="p-3.5">ঘাটতি</th>
+                                        <th class="p-3.5 text-center">অ্যাকশন</th>
                                     </tr>
                                 </thead>
-                                <tbody id="dashboard-project-table" class="divide-y divide-gray-100 text-sm">
-                                    <!-- Dynamic Rows -->
-                                </tbody>
+                                <tbody id="dashboard-project-table" class="divide-y divide-slate-100 text-sm"></tbody>
                             </table>
                         </div>
                     </div>
@@ -118,31 +127,41 @@
 
                 <!-- TAB 2: PROJECTS & STAFF -->
                 <div id="tab-projects" class="hidden space-y-6">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-lg font-bold text-slate-800">প্রজেক্ট ও পিন সুরক্ষিত স্টাফ ম্যানেজমেন্ট</h2>
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                        <div>
+                            <h2 class="font-bold text-slate-900 text-base">প্রজেক্ট ও প্রজেক্টভিত্তিক স্টাফ ম্যানেজমেন্ট</h2>
+                            <p class="text-xs text-slate-500">প্রতিটি প্রজেক্টের নিজস্ব ইউজার আইডি ও পিন দিয়ে আপডেট করতে হবে</p>
+                        </div>
                         <div class="flex gap-3">
-                            <button onclick="openModal('projectModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-plus mr-2"></i>প্রজেক্ট যোগ করুন</button>
-                            <button onclick="openPinModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-lock mr-2"></i>পিন দিয়ে স্টাফ আপডেট ফর্ম</button>
+                            <button onclick="openAdminModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow-md shadow-slate-900/10 flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved"></i> নতুন প্রজেক্ট যোগ করুন (এডমিন)
+                            </button>
+                            <button onclick="openProjectAuthModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow-md shadow-blue-600/20 flex items-center gap-2">
+                                <i class="fa-solid fa-key"></i> প্রজেক্ট স্টাফ আপডেট করুন
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Project List Cards -->
-                    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Dynamic Project Cards -->
-                    </div>
+                    <!-- Project Cards Grid -->
+                    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
                 <!-- TAB 3: INCIDENTS -->
                 <div id="tab-incidents" class="hidden space-y-6">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-lg font-bold text-slate-800">সিকিউরিটি ইনসিডেন্ট ও ঘটনা লগ</h2>
-                        <button onclick="openModal('incidentModal')" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-triangle-exclamation mr-2"></i>নতুন ইনসিডেন্ট রিপোর্ট</button>
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                        <div>
+                            <h2 class="font-bold text-slate-900 text-base">সিকিউরিটি ইনসিডেন্ট ও ঘটনা লগ</h2>
+                            <p class="text-xs text-slate-500">নিরাপত্তা সংক্রান্ত যেকোনো ঘটনা রিপোর্ট করুন</p>
+                        </div>
+                        <button onclick="openIncidentAuthModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow-md shadow-rose-600/20 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> নতুন ইনসিডেন্ট রিপোর্ট
+                        </button>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                         <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
+                                <tr class="bg-slate-50 text-slate-500 uppercase text-[11px] tracking-wider border-b border-slate-200">
                                     <th class="p-4">তারিখ ও সময়</th>
                                     <th class="p-4">প্রজেক্টের নাম</th>
                                     <th class="p-4">ঘটনার বিবরণ</th>
@@ -150,9 +169,7 @@
                                     <th class="p-4">স্ট্যাটাস</th>
                                 </tr>
                             </thead>
-                            <tbody id="incidents-table-body" class="divide-y divide-gray-100 text-sm">
-                                <!-- Dynamic Incidents -->
-                            </tbody>
+                            <tbody id="incidents-table-body" class="divide-y divide-slate-100 text-sm"></tbody>
                         </table>
                     </div>
                 </div>
@@ -161,86 +178,139 @@
         </div>
     </div>
 
-    <!-- MODAL: Project Detail View (Category Breakdown) -->
-    <div id="projectDetailModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-2xl rounded-2xl p-6 shadow-xl space-y-4 max-h-[90vh] overflow-y-auto">
+    <!-- MODAL: Project Detail View -->
+    <div id="projectDetailModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b pb-3">
                 <div>
-                    <h3 id="modal-proj-title" class="font-bold text-lg text-slate-800">প্রজেক্টের নাম</h3>
-                    <p id="modal-proj-loc" class="text-xs text-gray-500">লোকেশন</p>
+                    <h3 id="modal-proj-title" class="font-bold text-lg text-slate-900">প্রজেক্ট</h3>
+                    <p id="modal-proj-id-badge" class="text-xs text-blue-600 font-semibold mt-0.5">ইউজার আইডি</p>
                 </div>
-                <button onclick="closeModal('projectDetailModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModal('projectDetailModal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div>
-                <h4 class="text-sm font-bold text-slate-700 mb-3"><i class="fa-solid fa-users-gear text-blue-600 mr-2"></i>ক্যাটাগরি অনুযায়ী জনবল ও ঘাটতি</h4>
+                <h4 class="text-xs font-bold text-slate-500 uppercase mb-3"><i class="fa-solid fa-users-gear text-blue-600 mr-1.5"></i>ক্যাটাগরিভিত্তিক জনবল ও ঘাটতি</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
-                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
+                            <tr class="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-b">
                                 <th class="p-2.5">ক্যাটাগরি</th>
                                 <th class="p-2.5">অনুমোদিত</th>
                                 <th class="p-2.5">অন-ডিউটি</th>
                                 <th class="p-2.5">ঘাটতি</th>
                             </tr>
                         </thead>
-                        <tbody id="modal-category-tbody" class="divide-y divide-gray-100">
-                            <!-- Dynamic category list -->
-                        </tbody>
+                        <tbody id="modal-category-tbody" class="divide-y divide-slate-100"></tbody>
                     </table>
                 </div>
             </div>
             <div class="pt-3 border-t flex justify-end">
-                <button onclick="closeModal('projectDetailModal')" class="px-4 py-2 bg-slate-800 text-white rounded-lg text-sm font-medium">বন্ধ করুন</button>
+                <button onclick="closeModal('projectDetailModal')" class="px-5 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold">বন্ধ করুন</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: PIN Verification for Staff Update -->
-    <div id="pinModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-xl space-y-4 text-center">
-            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-shield-keyhole"></i></div>
-            <h3 class="font-bold text-lg text-slate-800">নিরাপত্তা পিন কোড দিন</h3>
-            <p class="text-xs text-gray-500">স্টাফ সংযোজন ও পরিবর্তনের জন্য নির্দিষ্ট সিকিউরিটি পিন নম্বর দিন (ডিফল্ট পিন: <span class="font-bold text-blue-600">1234</span>)</p>
-            <form onsubmit="verifyPin(event)" class="space-y-4">
-                <input type="password" id="securityPin" placeholder="৪ ডিজিটের পিন নম্বর" maxlength="4" required class="w-full text-center tracking-widest text-lg border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500">
-                <div class="flex gap-2">
-                    <button type="button" onclick="closeModal('pinModal')" class="w-1/2 px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
-                    <button type="submit" class="w-1/2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">যাচাই করুন</button>
+    <!-- MODAL: Admin Password for Project Addition -->
+    <div id="adminAuthModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl space-y-4 text-center">
+            <div class="w-12 h-12 bg-slate-100 text-slate-900 rounded-2xl flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-lock"></i></div>
+            <h3 class="font-bold text-lg text-slate-900">এডমিন পাসওয়ার্ড দিন</h3>
+            <p class="text-xs text-slate-500">নতুন প্রজেক্ট যোগ করতে এডমিন পাসওয়ার্ড দিন (পাসওয়ার্ড: <span class="font-bold text-blue-600">admin123</span>)</p>
+            <form onsubmit="verifyAdminPassword(event)" class="space-y-3">
+                <input type="password" id="adminPasswordInput" placeholder="পাসওয়ার্ড লিখুন" required class="w-full text-center tracking-widest text-base border border-slate-200 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-slate-900">
+                <div class="flex gap-2 pt-1">
+                    <button type="button" onclick="closeModal('adminAuthModal')" class="w-1/2 px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-semibold hover:bg-slate-50">বাতিল</button>
+                    <button type="submit" class="w-1/2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold">যাচাই করুন</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Add Staff with PIN Authentication -->
-    <div id="staffModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+    <!-- MODAL: Add New Project (Admin) -->
+    <div id="projectModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-lg text-emerald-700"><i class="fa-solid fa-user-pen mr-2"></i>স্টাফ ডিউটি আপডেট ও অ্যাসাইন ফর্ম</h3>
-                <button onclick="closeModal('staffModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="font-bold text-slate-900 text-base">নতুন প্রজেক্ট যোগ করুন</h3>
+                <button onclick="closeModal('projectModal')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <form onsubmit="handleSaveStaff(event)" class="space-y-4">
+            <form onsubmit="handleSaveProject(event)" class="space-y-3">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্ট সিলেক্ট করুন</label>
-                    <select id="staffProject" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></select>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">কোম্পানি / প্রজেক্টের নাম</label>
+                    <input type="text" id="projName" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">ইউজার আইডি (Login ID)</label>
+                    <input type="text" id="projUserId" placeholder="যেমন: uel_53mw" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">নিরাপত্তা পিন/পাসওয়ার্ড</label>
+                    <input type="password" id="projPin" placeholder="৪ বা ৬ ডিজিট" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">প্রয়োজনীয় মোট জনবল</label>
+                    <input type="number" id="projReqCount" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                    <button type="button" onclick="closeModal('projectModal')" class="px-4 py-2 border rounded-xl text-xs font-semibold">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold">সংরক্ষণ করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Project Authentication for Staff Update -->
+    <div id="projectAuthModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl space-y-4 text-center">
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-key"></i></div>
+            <h3 class="font-bold text-lg text-slate-900">প্রজেক্ট অথেন্টিকেশন</h3>
+            <p class="text-xs text-slate-500">আপনার নির্দিষ্ট প্রজেক্ট আইডি ও পিন নম্বর দিয়ে লগइन করুন</p>
+            <form onsubmit="verifyProjectLogin(event)" class="space-y-3 text-left">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">প্রজেক্ট সিলেক্ট করুন</label>
+                    <select id="authProjectSelect" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">সিকিউরিটি পিন / পাসওয়ার্ড</label>
+                    <input type="password" id="authProjectPin" placeholder="পিন কোড দিন" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeModal('projectAuthModal')" class="w-1/2 px-4 py-2.5 border rounded-xl text-xs font-semibold hover:bg-slate-50 text-center">বাতিল</button>
+                    <button type="submit" class="w-1/2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold text-center">লগইন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Staff Assignment Form -->
+    <div id="staffModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <div>
+                    <h3 class="font-bold text-slate-900 text-base" id="staff-modal-title">স্টাফ ডিউটি আপডেট ফর্ম</h3>
+                    <p id="active-project-tag" class="text-xs text-emerald-600 font-semibold"></p>
+                </div>
+                <button onclick="closeModal('staffModal')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleSaveStaff(event)" class="space-y-3">
+                <input type="hidden" id="currentStaffProjectName">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">স্টাফের নাম</label>
-                        <input type="text" id="staffName" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">স্টাফের নাম</label>
+                        <input type="text" id="staffName" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">স্টাফ আইডি (ID)</label>
-                        <input type="text" id="staffId" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">স্টাফ আইডি (ID)</label>
+                        <input type="text" id="staffId" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">ফোন নম্বর</label>
-                        <input type="text" id="staffPhone" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ফোন নম্বর</label>
+                        <input type="text" id="staffPhone" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">ক্যাটাগরি</label>
-                        <select id="staffCategory" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ক্যাটাগরি</label>
+                        <select id="staffCategory" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="সিকিউরিটি গার্ড">সিকিউরিটি গার্ড</option>
                             <option value="ফিমেল সিকিউরিটি গার্ড">ফিমেল সিকিউরিটি গার্ড</option>
                             <option value="সিভিল গার্ড">সিভিল গার্ড</option>
@@ -252,71 +322,59 @@
                         </select>
                     </div>
                 </div>
-                <div class="flex justify-end gap-3 pt-3 border-t">
-                    <button type="button" onclick="closeModal('staffModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">নিশ্চিত করুন ও আপডেট করুন</button>
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                    <button type="button" onclick="closeModal('staffModal')" class="px-4 py-2 border rounded-xl text-xs font-semibold">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold">ডিউটি নিশ্চিত করুন</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Add Project -->
-    <div id="projectModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+    <!-- MODAL: Incident Password Auth -->
+    <div id="incidentAuthModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl space-y-4 text-center">
+            <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-lock"></i></div>
+            <h3 class="font-bold text-lg text-slate-900">পাসওয়ার্ড দিন</h3>
+            <p class="text-xs text-slate-500">ইনসিডেন্ট লগ যোগ করতে পাসওয়ার্ড দিন (পাসওয়ার্ড: <span class="font-bold text-rose-600">admin123</span>)</p>
+            <form onsubmit="verifyIncidentPassword(event)" class="space-y-3">
+                <input type="password" id="incidentPasswordInput" placeholder="পাসওয়ার্ড লিখুন" required class="w-full text-center tracking-widest text-base border border-slate-200 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-rose-500">
+                <div class="flex gap-2 pt-1">
+                    <button type="button" onclick="closeModal('incidentAuthModal')" class="w-1/2 px-4 py-2.5 border rounded-xl text-xs font-semibold hover:bg-slate-50">বাতিল</button>
+                    <button type="submit" class="w-1/2 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold">যাচাই করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Add Incident Form -->
+    <div id="incidentModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-lg">নতুন প্রজেক্ট যোগ করুন</h3>
-                <button onclick="closeModal('projectModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="font-bold text-slate-900 text-base">নতুন ইনসিডেন্ট রিপোর্ট করুন</h3>
+                <button onclick="closeModal('incidentModal')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <form onsubmit="handleSaveProject(event)" class="space-y-4">
+            <form onsubmit="handleSaveIncident(event)" class="space-y-3">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্টের নাম (যেমন: ওয়ারী ইউনিমার্ট)</label>
-                    <input type="text" id="projName" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">প্রজেক্ট সিলেক্ট করুন</label>
+                    <select id="incidentProject" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">লোকেশন</label>
-                    <input type="text" id="projLocation" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">ঘটনার বিস্তারিত বিবরণ</label>
+                    <textarea id="incidentDesc" rows="3" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রয়োজনীয় মোট জনবল (Required Manpower)</label>
-                    <input type="number" id="projReqCount" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">রিপোর্টার নাম ও পদবী</label>
+                    <input type="text" id="incidentReporter" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <div class="flex justify-end gap-3 pt-3 border-t">
-                    <button type="button" onclick="closeModal('projectModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">সংরক্ষণ করুন</button>
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                    <button type="button" onclick="closeModal('incidentModal')" class="px-4 py-2 border rounded-xl text-xs font-semibold">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-rose-600 text-white rounded-xl text-xs font-semibold">সাবমিট করুন</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Add Incident -->
-    <div id="incidentModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-lg">নতুন ইনসিডেন্ট রিপোর্ট করুন</h3>
-                <button onclick="closeModal('incidentModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <form onsubmit="handleSaveIncident(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্ট সিলেক্ট করুন</label>
-                    <select id="incidentProject" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">ঘটনার বিবরণ (Incident Details)</label>
-                    <textarea id="incidentDesc" rows="3" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">রিপোর্টার নাম ও পদবী</label>
-                    <input type="text" id="incidentReporter" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div class="flex justify-end gap-3 pt-3 border-t">
-                    <button type="button" onclick="closeModal('incidentModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
-                    <button type="submit" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-medium">সাবমিট করুন</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Application Logic -->
     <script>
         const categories = [
             "সিকিউরিটি গার্ড",
@@ -329,93 +387,180 @@
             "এক্সিকিউটিভ"
         ];
 
-        const CORRECT_PIN = "1234"; // ডিফল্ট পিন
+        const ADMIN_PASS = "admin123";
 
-        let projects = JSON.parse(localStorage.getItem('ug_sec_projects_v2')) || [
-            { id: 1, name: "ওয়ারী ইউনিমার্ট", location: "ওয়ারী", required: 30 },
-            { id: 2, name: "মিরপুর ইউনিমার্ট মেট্রো", location: "মিরপুর", required: 25 },
-            { id: 3, name: "শেফস টেবল ও কোর্টসাইড", location: "গুলশান", required: 20 },
-            { id: 4, name: "এয়ারপোর্ট ইউনিমার্ট", location: "উত্তরা", required: 50 }
+        // Full Project List with Unique User IDs and Default Pins
+        let projects = JSON.parse(localStorage.getItem('ug_sec_enterprise_projects')) || [
+            { id: 1, name: "United Enterprises & Co. Ltd. (UECL)", userId: "uecl_main", pin: "1111", required: 30 },
+            { id: 2, name: "United Enterprises & Co. Ltd. (Power Division)", userId: "uecl_power", pin: "1112", required: 25 },
+            { id: 3, name: "Orange IT Ltd. (OITL)", userId: "oitl", pin: "1113", required: 15 },
+            { id: 4, name: "Orange Solutions Ltd. (OSL)", userId: "osl", pin: "1114", required: 15 },
+            { id: 5, name: "United Power Generation and Distribution Co. Ltd. (UPGD)", userId: "upgd", pin: "1115", required: 40 },
+            { id: 6, name: "United Engineering & Power Services Ltd. (UEPSL) - DEPZ", userId: "uepsl_depz", pin: "1116", required: 35 },
+            { id: 7, name: "United Engineering & Power Services Ltd. (UEPSL) - CEPZ", userId: "uepsl_cepz", pin: "1117", required: 35 },
+            { id: 8, name: "United Energy Ltd. (UEL) 53 MW", userId: "uel_53", pin: "1118", required: 20 },
+            { id: 9, name: "United Energy Ltd. (UEL) 28 MW", userId: "uel_28", pin: "1119", required: 20 },
+            { id: 10, name: "United Ashuganj Energy Ltd. (UAEL) 200MW", userId: "uael_200", pin: "1120", required: 45 },
+            { id: 11, name: "United Mymensingh Power Ltd. (UMPL) 200 MW", userId: "umpl", pin: "1121", required: 45 },
+            { id: 12, name: "United Jamalpur Power Ltd. (UJPL) 115 MW", userId: "ujpl", pin: "1122", required: 30 },
+            { id: 13, name: "United Anwara Power Ltd. (UAnPL) 300 MW", userId: "uanpl", pin: "1123", required: 50 },
+            { id: 14, name: "United Payra Power Ltd. (UPPL)", userId: "uppl", pin: "1124", required: 40 },
+            { id: 15, name: "Neptune Commercial Ltd. (NCL) Project (Power)", userId: "ncl_power", pin: "1125", required: 20 },
+            { id: 16, name: "United Lube Oil Ltd. (ULOL)", userId: "ulol", pin: "1126", required: 25 },
+            { id: 17, name: "United Refinery & Bulk Storage Ltd. (URBSL)", userId: "urbsl", pin: "1127", required: 25 },
+            { id: 18, name: "Neptune Commercial Ltd. (NCL) (Construction)", userId: "ncl_const", pin: "1128", required: 30 },
+            { id: 19, name: "Ready Mix Concrete (RMC)", userId: "rmc", pin: "1129", required: 15 },
+            { id: 20, name: "United Property Solutions Ltd. (UPSL)", userId: "upsl", pin: "1130", required: 15 },
+            { id: 21, name: "United City Twin Tower Developers Ltd. (UCTTDL)", userId: "ucttdl", pin: "1131", required: 50 },
+            { id: 22, name: "Neptune Properties (NP)", userId: "np", pin: "1132", required: 20 },
+            { id: 23, name: "Neptune Land Development Ltd. (NLDL)", userId: "nldl", pin: "1133", required: 20 },
+            { id: 24, name: "United Purbachal Lands Ltd. (UPLL)", userId: "upll", pin: "1134", required: 25 },
+            { id: 25, name: "United LPG Ltd. (ULPGL)", userId: "ulpgl", pin: "1135", required: 30 },
+            { id: 26, name: "United Makkah Madina Travel & Assistance Co. Ltd.", userId: "ummtacl", pin: "1136", required: 10 },
+            { id: 27, name: "United Tank Terminal Ltd. (UTTL), Ashuganj", userId: "uttl_ashuganj", pin: "1137", required: 25 },
+            { id: 28, name: "United Tank Terminal Ltd. (UTTL), Chattogram", userId: "uttl_ctg", pin: "1138", required: 25 },
+            { id: 29, name: "United Elevator World Ltd. (UEWL)", userId: "uewl", pin: "1139", required: 15 },
+            { id: 30, name: "United Land Port Teknaf Ltd. (ULPTL)", userId: "ulptl", pin: "1140", required: 35 },
+            { id: 31, name: "United Healthcare & Services Ltd. (UHSL)", userId: "uhsl", pin: "1141", required: 30 },
+            { id: 32, name: "Oil Carriers Ltd (OCL)", userId: "ocl", pin: "1142", required: 20 },
+            { id: 33, name: "United Shipping and Logistic Services Ltd. (USLSL)", userId: "uslsl", pin: "1143", required: 25 },
+            { id: 34, name: "Moulvi Tea Co. (Pvt.) Ltd.", userId: "moulvitea", pin: "1144", required: 20 },
+            { id: 35, name: "United Pharma & Healthcare Ltd. (UPHL)", userId: "uphl", pin: "1145", required: 30 },
+            { id: 36, name: "United Grains & Spices Ltd. (UGSL)", userId: "ugsl", pin: "1146", required: 20 },
+            { id: 37, name: "Uniwell Health Ltd. (UwHL)", userId: "uwhl", pin: "1147", required: 20 },
+            { id: 38, name: "United Trust", userId: "unitedtrust", pin: "1148", required: 25 },
+            { id: 39, name: "Unimart Limited - Gulshan", userId: "unimart_gulshan", pin: "1234", required: 35 },
+            { id: 40, name: "Unimart Limited - Dhanmondi", userId: "unimart_dhanmondi", pin: "1235", required: 30 },
+            { id: 41, name: "Unimart Limited - Wari", userId: "unimart_wari", pin: "1236", required: 30 },
+            { id: 42, name: "Indulge", userId: "indulge", pin: "1149", required: 15 },
+            { id: 43, name: "Chef's Table - Courtside", userId: "chefs_courtside", pin: "1150", required: 25 },
+            { id: 44, name: "Chef's Table - Gulshan", userId: "chefs_gulshan", pin: "1151", required: 25 },
+            { id: 45, name: "Chef's Table - Dhanmondi", userId: "chefs_dhanmondi", pin: "1152", required: 25 },
+            { id: 46, name: "IPCO Developments (Bangladesh) Ltd.", userId: "ipco", pin: "1153", required: 40 },
+            { id: 47, name: "Sir John Wilson School (SJWS)", userId: "sjws", pin: "1154", required: 30 },
+            { id: 48, name: "United Sulpho-Chemicals Ltd. (USCL)", userId: "uscl", pin: "1155", required: 25 },
+            { id: 49, name: "Leviathan Global BD Ltd.", userId: "leviathan", pin: "1156", required: 15 },
+            { id: 50, name: "Gunze United Limited (GUL)", userId: "gunze", pin: "1157", required: 20 },
+            { id: 51, name: "Comilla Spinning Mills Ltd.", userId: "comillaspining", pin: "1158", required: 35 },
+            { id: 52, name: "United Hospital Limited (UHL)", userId: "uhl", pin: "1159", required: 80 },
+            { id: 53, name: "United College of Nursing (UNC)", userId: "unc", pin: "1160", required: 20 },
+            { id: 54, name: "United Medical College (UMC)", userId: "umc", pin: "1161", required: 40 },
+            { id: 55, name: "United International University (UIU)", userId: "uiu", pin: "1162", required: 45 },
+            { id: 56, name: "United Securities Ltd. (USL)", userId: "usl", pin: "1163", required: 15 },
+            { id: 57, name: "UG Security Services Ltd. (UGSSL)", userId: "ugssl", pin: "1164", required: 50 },
+            { id: 58, name: "Khulna Power Company Ltd. (KPCL)", userId: "kpcl", pin: "1165", required: 35 }
         ];
 
-        let staffList = JSON.parse(localStorage.getItem('ug_sec_staff_v2')) || [
-            { id: "UG-101", name: "রহিম উদ্দিন", phone: "01711223344", category: "সিকিউরিটি গার্ড", projectName: "ওয়ারী ইউনিমার্ট" },
-            { id: "UG-102", name: "করিম মিয়া", phone: "01811223344", category: "সিকিউরিটি সুপারভাইজার", projectName: "ওয়ারী ইউনিমার্ট" }
-        ];
-
-        let incidents = JSON.parse(localStorage.getItem('ug_sec_incidents_v2')) || [
-            { date: "2026-06-06 14:30", project: "ওয়ারী ইউনিমার্ট", desc: "সামান্য শৃঙ্খলা সংক্রান্ত বিষয় ছিল, সমাধান করা হয়েছে।", reporter: "করিম মিয়া (সুপারভাইজার)", status: "সমাধানকৃত" }
-        ];
+        let staffList = JSON.parse(localStorage.getItem('ug_sec_enterprise_staff')) || [];
+        let incidents = JSON.parse(localStorage.getItem('ug_sec_enterprise_incidents')) || [];
 
         function switchTab(tabId) {
             ['dashboard', 'projects', 'incidents'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
-                document.getElementById(`nav-${t}`).classList.remove('bg-blue-600', 'text-white');
-                document.getElementById(`nav-${t}`).classList.add('hover:bg-slate-800', 'text-slate-300');
+                document.getElementById(`nav-${t}`).classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
+                document.getElementById(`nav-${t}`).classList.add('hover:bg-slate-800/80', 'text-slate-300');
             });
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            document.getElementById(`nav-${tabId}`).classList.remove('hover:bg-slate-800', 'text-slate-300');
-            document.getElementById(`nav-${tabId}`).classList.add('bg-blue-600', 'text-white');
+            document.getElementById(`nav-${tabId}`).classList.remove('hover:bg-slate-800/80', 'text-slate-300');
+            document.getElementById(`nav-${tabId}`).classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
 
-            const titles = { 'dashboard': 'ওভারভিউ ড্যাশবোর্ড', 'projects': 'প্রজেক্ট ও জনবল', 'incidents': 'ইনসিডেন্ট লগ' };
+            const titles = { 
+                'dashboard': 'রিয়েল-টাইম সিকিউরিটি মনিটরিং ও জনবল ব্যবস্থাপনা সিস্টেম', 
+                'projects': 'প্রজেক্ট এবং প্রজেক্টভিত্তিক অন-ডিউটি স্টাফ লিস্ট', 
+                'incidents': 'সিকিউরিটি ইনসিডেন্ট ও ঘটনা লগ' 
+            };
             document.getElementById('page-title').innerText = titles[tabId];
         }
 
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
             document.getElementById(modalId).classList.add('flex');
-            populateProjectDropdowns();
+            populateDropdowns();
         }
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
             document.getElementById(modalId).classList.remove('flex');
         }
 
-        function openPinModal() {
-            document.getElementById('securityPin').value = '';
-            openModal('pinModal');
+        function openAdminModal() {
+            document.getElementById('adminPasswordInput').value = '';
+            openModal('adminAuthModal');
         }
 
-        function verifyPin(e) {
+        function verifyAdminPassword(e) {
             e.preventDefault();
-            const pin = document.getElementById('securityPin').value;
-            if(pin === CORRECT_PIN) {
-                closeModal('pinModal');
-                openModal('staffModal');
+            const pass = document.getElementById('adminPasswordInput').value;
+            if(pass === ADMIN_PASS) {
+                closeModal('adminAuthModal');
+                openModal('projectModal');
             } else {
-                alert('ভুল সিকিউরিটি পিন কোড! সঠিক পিন দিন (1234)');
+                alert('ভুল এডমিন পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন (admin123)');
             }
         }
 
-        function populateProjectDropdowns() {
-            const selects = ['staffProject', 'incidentProject'];
-            selects.forEach(selId => {
-                const el = document.getElementById(selId);
-                if(el) {
-                    el.innerHTML = projects.map(p => `<option value="${p.name}">${p.name} (${p.location})</option>`).join('');
-                }
-            });
+        function openIncidentAuthModal() {
+            document.getElementById('incidentPasswordInput').value = '';
+            openModal('incidentAuthModal');
         }
 
-        // Project Click Detail View
+        function verifyIncidentPassword(e) {
+            e.preventDefault();
+            const pass = document.getElementById('incidentPasswordInput').value;
+            if(pass === ADMIN_PASS) {
+                closeModal('incidentAuthModal');
+                openModal('incidentModal');
+            } else {
+                alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন (admin123)');
+            }
+        }
+
+        function openProjectAuthModal() {
+            document.getElementById('authProjectPin').value = '';
+            populateDropdowns();
+            openModal('projectAuthModal');
+        }
+
+        function verifyProjectLogin(e) {
+            e.preventDefault();
+            const projName = document.getElementById('authProjectSelect').value;
+            const pin = document.getElementById('authProjectPin').value;
+
+            const proj = projects.find(p => p.name === projName);
+            if(proj && proj.pin === pin) {
+                closeModal('projectAuthModal');
+                document.getElementById('currentStaffProjectName').value = proj.name;
+                document.getElementById('active-project-tag').innerText = `প্রজেক্ট: ${proj.name} (ID: ${proj.userId})`;
+                openModal('staffModal');
+            } else {
+                alert('ভুল সিকিউরিটি পিন কোড! এই প্রজেক্টের সঠিক পিন দিন।');
+            }
+        }
+
+        function populateDropdowns() {
+            const authSelect = document.getElementById('authProjectSelect');
+            const incSelect = document.getElementById('incidentProject');
+            
+            const optionsHtml = projects.map(p => `<option value="${p.name}">${p.name} [ID: ${p.userId}]</option>`).join('');
+            if(authSelect) authSelect.innerHTML = optionsHtml;
+            if(incSelect) incSelect.innerHTML = optionsHtml;
+        }
+
         function openProjectDetail(projName) {
             const p = projects.find(item => item.name === projName);
             if(!p) return;
 
             document.getElementById('modal-proj-title').innerText = p.name;
-            document.getElementById('modal-proj-loc').innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i>লোকেশন: ${p.location} | মোট অনুমোদিত: ${p.required}`;
+            document.getElementById('modal-proj-id-badge').innerHTML = `<i class="fa-solid fa-id-badge mr-1"></i>ইউজার আইডি: ${p.userId} | অনুমোদিত জনবল: ${p.required}`;
             
             const pStaff = staffList.filter(s => s.projectName === p.name);
             const tbody = document.getElementById('modal-category-tbody');
-            
-            // Distribute required roughly across categories for preview
             const perCatReq = Math.max(1, Math.round(p.required / categories.length));
 
             tbody.innerHTML = categories.map(cat => {
                 const onDutyCount = pStaff.filter(s => s.category === cat).length;
                 const shortageCount = Math.max(0, perCatReq - onDutyCount);
                 return `
-                    <tr class="hover:bg-gray-50">
+                    <tr class="hover:bg-slate-50">
                         <td class="p-2.5 font-medium text-slate-700">${cat}</td>
                         <td class="p-2.5 text-blue-600 font-semibold">${perCatReq}</td>
                         <td class="p-2.5 text-emerald-600 font-semibold">${onDutyCount}</td>
@@ -430,11 +575,12 @@
         function handleSaveProject(e) {
             e.preventDefault();
             const name = document.getElementById('projName').value;
-            const location = document.getElementById('projLocation').value;
+            const userId = document.getElementById('projUserId').value;
+            const pin = document.getElementById('projPin').value;
             const required = parseInt(document.getElementById('projReqCount').value);
 
-            projects.push({ id: Date.now(), name, location, required });
-            localStorage.setItem('ug_sec_projects_v2', JSON.stringify(projects));
+            projects.push({ id: Date.now(), name, userId, pin, required });
+            localStorage.setItem('ug_sec_enterprise_projects', JSON.stringify(projects));
             closeModal('projectModal');
             e.target.reset();
             renderAll();
@@ -442,17 +588,18 @@
 
         function handleSaveStaff(e) {
             e.preventDefault();
+            const projectName = document.getElementById('currentStaffProjectName').value;
             const staff = {
                 id: document.getElementById('staffId').value,
                 name: document.getElementById('staffName').value,
                 phone: document.getElementById('staffPhone').value,
                 category: document.getElementById('staffCategory').value,
-                projectName: document.getElementById('staffProject').value
+                projectName: projectName
             };
-            // Replace if ID already exists, or add new
+
             staffList = staffList.filter(s => s.id !== staff.id);
             staffList.push(staff);
-            localStorage.setItem('ug_sec_staff_v2', JSON.stringify(staffList));
+            localStorage.setItem('ug_sec_enterprise_staff', JSON.stringify(staffList));
             closeModal('staffModal');
             e.target.reset();
             renderAll();
@@ -466,10 +613,10 @@
                 project: document.getElementById('incidentProject').value,
                 desc: document.getElementById('incidentDesc').value,
                 reporter: document.getElementById('incidentReporter').value,
-                status: "অমীমাংসিত/নজরদারিতে"
+                status: "নজরদারিতে/চলমান"
             };
             incidents.push(incident);
-            localStorage.setItem('ug_sec_incidents_v2', JSON.stringify(incidents));
+            localStorage.setItem('ug_sec_enterprise_incidents', JSON.stringify(incidents));
             closeModal('incidentModal');
             e.target.reset();
             renderAll();
@@ -478,16 +625,19 @@
         function deleteStaff(staffId) {
             if(confirm('আপনি কি এই স্টাফকে ডিউটি থেকে সরাতে চান?')) {
                 staffList = staffList.filter(s => s.id !== staffId);
-                localStorage.setItem('ug_sec_staff_v2', JSON.stringify(staffList));
+                localStorage.setItem('ug_sec_enterprise_staff', JSON.stringify(staffList));
                 renderAll();
             }
         }
 
         function deleteProject(projId) {
-            if(confirm('প্রজেক্টটি মুছে ফেললে এর সাথে সম্পর্কিত সব ডাটা মুছে যাবে। নিশ্চিত তো?')) {
+            const pass = prompt('প্রজেক্ট মুছে ফেলতে এডমিন পাসওয়ার্ড দিন (admin123):');
+            if(pass === ADMIN_PASS) {
                 projects = projects.filter(p => p.id !== projId);
-                localStorage.setItem('ug_sec_projects_v2', JSON.stringify(projects));
+                localStorage.setItem('ug_sec_enterprise_projects', JSON.stringify(projects));
                 renderAll();
+            } else if(pass !== null) {
+                alert('ভুল পাসওয়ার্ড!');
             }
         }
 
@@ -505,64 +655,68 @@
             document.getElementById('sidebar-proj-count').innerText = totalProj;
             document.getElementById('sidebar-staff-count').innerText = totalOnDuty;
 
-            // Dashboard Project Table
+            // Dashboard Table
             const dashTable = document.getElementById('dashboard-project-table');
             dashTable.innerHTML = projects.map(p => {
                 const pStaff = staffList.filter(s => s.projectName === p.name);
                 const shortage = Math.max(0, p.required - pStaff.length);
                 return `
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="p-3 font-bold text-blue-600 cursor-pointer hover:underline" onclick="openProjectDetail('${p.name}')">${p.name} <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></td>
-                        <td class="p-3 text-gray-500 text-xs">${p.location}</td>
-                        <td class="p-3 font-semibold text-slate-700">${p.required}</td>
-                        <td class="p-3 font-semibold text-emerald-600">${pStaff.length}</td>
-                        <td class="p-3 font-semibold text-rose-600">${shortage}</td>
-                        <td class="p-3 text-center">
-                            <button onclick="openProjectDetail('${p.name}')" class="bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded text-xs font-medium">বিস্তারিত</button>
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="p-3.5">
+                            <span onclick="openProjectDetail('${p.name}')" class="font-bold text-blue-600 cursor-pointer hover:underline">${p.name}</span>
+                            <span class="block text-[11px] text-slate-400">ID: ${p.userId}</span>
+                        </td>
+                        <td class="p-3.5 font-semibold text-slate-700">${p.required}</td>
+                        <td class="p-3.5 font-semibold text-emerald-600">${pStaff.length}</td>
+                        <td class="p-3.5 font-semibold text-rose-600">${shortage}</td>
+                        <td class="p-3.5 text-center">
+                            <button onclick="openProjectDetail('${p.name}')" class="bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1.5 rounded-lg text-xs font-medium transition">বিস্তারিত</button>
                         </td>
                     </tr>
                 `;
             }).join('');
 
-            // Projects Cards Grid (Tab 2)
+            // Projects Grid (Tab 2)
             const projGrid = document.getElementById('projects-grid');
             projGrid.innerHTML = projects.map(p => {
                 const pStaff = staffList.filter(s => s.projectName === p.name);
                 const shortage = Math.max(0, p.required - pStaff.length);
                 return `
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 space-y-4">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 space-y-4 hover:shadow-md transition">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h3 class="font-bold text-lg text-slate-800 cursor-pointer hover:text-blue-600" onclick="openProjectDetail('${p.name}')">${p.name}</h3>
-                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot mr-1"></i>${p.location}</p>
+                                <h3 class="font-bold text-slate-900 text-sm cursor-pointer hover:text-blue-600" onclick="openProjectDetail('${p.name}')">${p.name}</h3>
+                                <p class="text-[11px] text-blue-600 font-semibold mt-0.5"><i class="fa-solid fa-id-badge mr-1"></i>ID: ${p.userId}</p>
                             </div>
-                            <button onclick="deleteProject(${p.id})" class="text-gray-400 hover:text-rose-600 text-sm"><i class="fa-solid fa-trash"></i></button>
+                            <button onclick="deleteProject(${p.id})" class="text-slate-300 hover:text-rose-600 text-sm p-1"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
-                        <div class="grid grid-cols-3 gap-2 bg-gray-50 p-3 rounded-lg text-center text-xs">
+                        <div class="grid grid-cols-3 gap-2 bg-slate-50 p-3 rounded-xl text-center text-xs border border-slate-100">
                             <div>
-                                <span class="text-gray-500 block">অনুমোদিত</span>
-                                <span class="font-bold text-blue-600 text-base">${p.required}</span>
+                                <span class="text-slate-400 block text-[10px] uppercase font-semibold">অনুমোদিত</span>
+                                <span class="font-black text-blue-600 text-sm">${p.required}</span>
                             </div>
                             <div>
-                                <span class="text-gray-500 block">অন-ডিউটি</span>
-                                <span class="font-bold text-emerald-600 text-base">${pStaff.length}</span>
+                                <span class="text-slate-400 block text-[10px] uppercase font-semibold">অন-ডিউটি</span>
+                                <span class="font-black text-emerald-600 text-sm">${pStaff.length}</span>
                             </div>
                             <div>
-                                <span class="text-gray-500 block">ঘাটতি</span>
-                                <span class="font-bold text-rose-600 text-base">${shortage}</span>
+                                <span class="text-slate-400 block text-[10px] uppercase font-semibold">ঘাটতি</span>
+                                <span class="font-black text-rose-600 text-sm">${shortage}</span>
                             </div>
                         </div>
                         <div>
-                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">অন-ডিউটি গার্ড ও আইডি তালিকা:</h4>
-                            <div class="space-y-2 max-h-40 overflow-y-auto pr-1">
-                                ${pStaff.length === 0 ? '<p class="text-xs text-gray-400 italic">কোনো স্টাফ অ্যাসাইন করা নেই</p>' : 
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[11px] font-bold text-slate-400 uppercase">অন-ডিউটি স্টাফ তালিকা:</span>
+                            </div>
+                            <div class="space-y-2 max-h-36 overflow-y-auto pr-1">
+                                ${pStaff.length === 0 ? '<p class="text-xs text-slate-400 italic text-center py-2 bg-slate-50 rounded-xl">কোনো স্টাফ অ্যাসাইন করা নেই</p>' : 
                                     pStaff.map(s => `
-                                        <div class="flex justify-between items-center bg-gray-50 p-2 rounded text-xs border border-gray-100">
+                                        <div class="flex justify-between items-center bg-slate-50 p-2.5 rounded-xl text-xs border border-slate-100">
                                             <div>
-                                                <p class="font-semibold text-slate-800">${s.name} <span class="text-blue-600 font-bold">(${s.id})</span></p>
-                                                <p class="text-gray-500">${s.category} • <i class="fa-solid fa-phone text-[10px]"></i> ${s.phone}</p>
+                                                <p class="font-bold text-slate-800">${s.name} <span class="text-blue-600">(${s.id})</span></p>
+                                                <p class="text-slate-500 text-[10px]">${s.category} • <i class="fa-solid fa-phone text-[9px]"></i> ${s.phone}</p>
                                             </div>
-                                            <button onclick="deleteStaff('${s.id}')" class="text-rose-500 hover:text-rose-700 px-1" title="মুছে ফেলুন"><i class="fa-solid fa-xmark"></i></button>
+                                            <button onclick="deleteStaff('${s.id}')" class="text-slate-400 hover:text-rose-600 p-1"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     `).join('')
                                 }
@@ -574,14 +728,14 @@
 
             // Incidents Table
             const incTable = document.getElementById('incidents-table-body');
-            incTable.innerHTML = incidents.length === 0 ? `<tr><td colspan="5" class="p-4 text-center text-gray-400">কোনো ইনসিডেন্ট রেকর্ড পাওয়া যায়নি</td></tr>` :
+            incTable.innerHTML = incidents.length === 0 ? `<tr><td colspan="5" class="p-6 text-center text-slate-400 text-sm italic">কোনো ইনসিডেন্ট রেকর্ড পাওয়া যায়নি</td></tr>` :
                 incidents.map(i => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-4 text-gray-500 text-xs">${i.date}</td>
-                        <td class="p-4 font-semibold text-slate-800">${i.project}</td>
-                        <td class="p-4 text-gray-700">${i.desc}</td>
-                        <td class="p-4 text-gray-600 text-xs">${i.reporter}</td>
-                        <td class="p-4"><span class="bg-amber-50 text-amber-700 px-2 py-1 rounded text-xs font-medium border border-amber-200">${i.status}</span></td>
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-4 text-slate-500 text-xs">${i.date}</td>
+                        <td class="p-4 font-bold text-slate-800">${i.project}</td>
+                        <td class="p-4 text-slate-700">${i.desc}</td>
+                        <td class="p-4 text-slate-600 text-xs">${i.reporter}</td>
+                        <td class="p-4"><span class="bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-[11px] font-bold border border-amber-200">${i.status}</span></td>
                     </tr>
                 `).join('');
         }
