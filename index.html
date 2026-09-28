@@ -90,20 +90,25 @@
                         </div>
                     </div>
 
-                    <!-- Category Breakdown -->
+                    <!-- Project Summary Table with Click Detail -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-chart-simple mr-2 text-blue-600"></i>ক্যাটাগরিভিত্তিক জনবল ও ঘাটতি</h3>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-list-check mr-2 text-blue-600"></i>প্রজেক্টভিত্তিক জনবল ও ঘাটতি তালিকা</h3>
+                            <p class="text-xs text-gray-500 italic">* বিস্তারিত দেখতে প্রজেক্টের নামের উপর ক্লিক করুন</p>
+                        </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
                                     <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
-                                        <th class="p-3">ক্যাটাগরি</th>
-                                        <th class="p-3">অনুমোদিত</th>
-                                        <th class="p-3">অন-ডিউটি</th>
-                                        <th class="p-3">ঘাটতি</th>
+                                        <th class="p-3">প্রজেক্টের নাম</th>
+                                        <th class="p-3">লোকেশন</th>
+                                        <th class="p-3">অনুমোদিত জনবল</th>
+                                        <th class="p-3">বর্তমান অন-ডিউটি</th>
+                                        <th class="p-3">ঘাটতি (Shortage)</th>
+                                        <th class="p-3 text-center">অ্যাকশন</th>
                                     </tr>
                                 </thead>
-                                <tbody id="category-table-body" class="divide-y divide-gray-100 text-sm">
+                                <tbody id="dashboard-project-table" class="divide-y divide-gray-100 text-sm">
                                     <!-- Dynamic Rows -->
                                 </tbody>
                             </table>
@@ -114,10 +119,10 @@
                 <!-- TAB 2: PROJECTS & STAFF -->
                 <div id="tab-projects" class="hidden space-y-6">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-lg font-bold text-slate-800">প্রজেক্ট ও স্টাফ ম্যানেজমেন্ট</h2>
+                        <h2 class="text-lg font-bold text-slate-800">প্রজেক্ট ও পিন সুরক্ষিত স্টাফ ম্যানেজমেন্ট</h2>
                         <div class="flex gap-3">
                             <button onclick="openModal('projectModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-plus mr-2"></i>প্রজেক্ট যোগ করুন</button>
-                            <button onclick="openModal('staffModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-user-plus mr-2"></i>স্টাফ ডিউটি অ্যাসাইন</button>
+                            <button onclick="openPinModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm"><i class="fa-solid fa-lock mr-2"></i>পিন দিয়ে স্টাফ আপডেট ফর্ম</button>
                         </div>
                     </div>
 
@@ -156,39 +161,61 @@
         </div>
     </div>
 
-    <!-- MODAL: Add Project -->
-    <div id="projectModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+    <!-- MODAL: Project Detail View (Category Breakdown) -->
+    <div id="projectDetailModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-2xl rounded-2xl p-6 shadow-xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-lg">নতুন প্রজেক্ট যোগ করুন</h3>
-                <button onclick="closeModal('projectModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <div>
+                    <h3 id="modal-proj-title" class="font-bold text-lg text-slate-800">প্রজেক্টের নাম</h3>
+                    <p id="modal-proj-loc" class="text-xs text-gray-500">লোকেশন</p>
+                </div>
+                <button onclick="closeModal('projectDetailModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <form onsubmit="handleSaveProject(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্টের নাম (যেমন: উসিমার্ট মিরপুর)</label>
-                    <input type="text" id="projName" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+            <div>
+                <h4 class="text-sm font-bold text-slate-700 mb-3"><i class="fa-solid fa-users-gear text-blue-600 mr-2"></i>ক্যাটাগরি অনুযায়ী জনবল ও ঘাটতি</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider border-b">
+                                <th class="p-2.5">ক্যাটাগরি</th>
+                                <th class="p-2.5">অনুমোদিত</th>
+                                <th class="p-2.5">অন-ডিউটি</th>
+                                <th class="p-2.5">ঘাটতি</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-category-tbody" class="divide-y divide-gray-100">
+                            <!-- Dynamic category list -->
+                        </tbody>
+                    </table>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">লোকেশন</label>
-                    <input type="text" id="projLocation" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রয়োজনীয় মোট জনবল (Required Manpower)</label>
-                    <input type="number" id="projReqCount" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div class="flex justify-end gap-3 pt-3 border-t">
-                    <button type="button" onclick="closeModal('projectModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">সংরক্ষণ করুন</button>
+            </div>
+            <div class="pt-3 border-t flex justify-end">
+                <button onclick="closeModal('projectDetailModal')" class="px-4 py-2 bg-slate-800 text-white rounded-lg text-sm font-medium">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PIN Verification for Staff Update -->
+    <div id="pinModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-xl space-y-4 text-center">
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-shield-keyhole"></i></div>
+            <h3 class="font-bold text-lg text-slate-800">নিরাপত্তা পিন কোড দিন</h3>
+            <p class="text-xs text-gray-500">স্টাফ সংযোজন ও পরিবর্তনের জন্য নির্দিষ্ট সিকিউরিটি পিন নম্বর দিন (ডিফল্ট পিন: <span class="font-bold text-blue-600">1234</span>)</p>
+            <form onsubmit="verifyPin(event)" class="space-y-4">
+                <input type="password" id="securityPin" placeholder="৪ ডিজিটের পিন নম্বর" maxlength="4" required class="w-full text-center tracking-widest text-lg border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="flex gap-2">
+                    <button type="button" onclick="closeModal('pinModal')" class="w-1/2 px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
+                    <button type="submit" class="w-1/2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">যাচাই করুন</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Add Staff -->
+    <!-- MODAL: Add Staff with PIN Authentication -->
     <div id="staffModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
         <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-lg">ডিউটিতে স্টাফ অ্যাসাইন করুন</h3>
+                <h3 class="font-bold text-lg text-emerald-700"><i class="fa-solid fa-user-pen mr-2"></i>স্টাফ ডিউটি আপডেট ও অ্যাসাইন ফর্ম</h3>
                 <button onclick="closeModal('staffModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <form onsubmit="handleSaveStaff(event)" class="space-y-4">
@@ -227,7 +254,35 @@
                 </div>
                 <div class="flex justify-end gap-3 pt-3 border-t">
                     <button type="button" onclick="closeModal('staffModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">অ্যাসাইন করুন</button>
+                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">নিশ্চিত করুন ও আপডেট করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Add Project -->
+    <div id="projectModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg">নতুন প্রজেক্ট যোগ করুন</h3>
+                <button onclick="closeModal('projectModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="handleSaveProject(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রজেক্টের নাম (যেমন: ওয়ারী ইউনিমার্ট)</label>
+                    <input type="text" id="projName" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">লোকেশন</label>
+                    <input type="text" id="projLocation" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">প্রয়োজনীয় মোট জনবল (Required Manpower)</label>
+                    <input type="number" id="projReqCount" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex justify-end gap-3 pt-3 border-t">
+                    <button type="button" onclick="closeModal('projectModal')" class="px-4 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">বাতিল</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">সংরক্ষণ করুন</button>
                 </div>
             </form>
         </div>
@@ -274,19 +329,21 @@
             "এক্সিকিউটিভ"
         ];
 
-        let projects = JSON.parse(localStorage.getItem('ug_sec_projects')) || [
+        const CORRECT_PIN = "1234"; // ডিফল্ট পিন
+
+        let projects = JSON.parse(localStorage.getItem('ug_sec_projects_v2')) || [
             { id: 1, name: "ওয়ারী ইউনিমার্ট", location: "ওয়ারী", required: 30 },
             { id: 2, name: "মিরপুর ইউনিমার্ট মেট্রো", location: "মিরপুর", required: 25 },
-            { id: 3, name: "শেফস টেবল ও কোর্টসাইড", location: "গুলশান", required: 20 }
+            { id: 3, name: "শেফস টেবল ও কোর্টসাইড", location: "গুলশান", required: 20 },
+            { id: 4, name: "এয়ারপোর্ট ইউনিমার্ট", location: "উত্তরা", required: 50 }
         ];
 
-        let staffList = JSON.parse(localStorage.getItem('ug_sec_staff')) || [
+        let staffList = JSON.parse(localStorage.getItem('ug_sec_staff_v2')) || [
             { id: "UG-101", name: "রহিম উদ্দিন", phone: "01711223344", category: "সিকিউরিটি গার্ড", projectName: "ওয়ারী ইউনিমার্ট" },
-            { id: "UG-102", name: "করিম মিয়া", phone: "01811223344", category: "সিকিউরিটি সুপারভাইজার", projectName: "ওয়ারী ইউনিমার্ট" },
-            { id: "UG-103", name: "সাজেদা বেগম", phone: "01911223344", category: "ফিমেল সিকিউরিটি গার্ড", projectName: "মিরপুর ইউনিমার্ট মেট্রো" }
+            { id: "UG-102", name: "করিম মিয়া", phone: "01811223344", category: "সিকিউরিটি সুপারভাইজার", projectName: "ওয়ারী ইউনিমার্ট" }
         ];
 
-        let incidents = JSON.parse(localStorage.getItem('ug_sec_incidents')) || [
+        let incidents = JSON.parse(localStorage.getItem('ug_sec_incidents_v2')) || [
             { date: "2026-06-06 14:30", project: "ওয়ারী ইউনিমার্ট", desc: "সামান্য শৃঙ্খলা সংক্রান্ত বিষয় ছিল, সমাধান করা হয়েছে।", reporter: "করিম মিয়া (সুপারভাইজার)", status: "সমাধানকৃত" }
         ];
 
@@ -314,6 +371,22 @@
             document.getElementById(modalId).classList.remove('flex');
         }
 
+        function openPinModal() {
+            document.getElementById('securityPin').value = '';
+            openModal('pinModal');
+        }
+
+        function verifyPin(e) {
+            e.preventDefault();
+            const pin = document.getElementById('securityPin').value;
+            if(pin === CORRECT_PIN) {
+                closeModal('pinModal');
+                openModal('staffModal');
+            } else {
+                alert('ভুল সিকিউরিটি পিন কোড! সঠিক পিন দিন (1234)');
+            }
+        }
+
         function populateProjectDropdowns() {
             const selects = ['staffProject', 'incidentProject'];
             selects.forEach(selId => {
@@ -324,6 +397,36 @@
             });
         }
 
+        // Project Click Detail View
+        function openProjectDetail(projName) {
+            const p = projects.find(item => item.name === projName);
+            if(!p) return;
+
+            document.getElementById('modal-proj-title').innerText = p.name;
+            document.getElementById('modal-proj-loc').innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i>লোকেশন: ${p.location} | মোট অনুমোদিত: ${p.required}`;
+            
+            const pStaff = staffList.filter(s => s.projectName === p.name);
+            const tbody = document.getElementById('modal-category-tbody');
+            
+            // Distribute required roughly across categories for preview
+            const perCatReq = Math.max(1, Math.round(p.required / categories.length));
+
+            tbody.innerHTML = categories.map(cat => {
+                const onDutyCount = pStaff.filter(s => s.category === cat).length;
+                const shortageCount = Math.max(0, perCatReq - onDutyCount);
+                return `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-2.5 font-medium text-slate-700">${cat}</td>
+                        <td class="p-2.5 text-blue-600 font-semibold">${perCatReq}</td>
+                        <td class="p-2.5 text-emerald-600 font-semibold">${onDutyCount}</td>
+                        <td class="p-2.5 text-rose-600 font-semibold">${shortageCount}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            openModal('projectDetailModal');
+        }
+
         function handleSaveProject(e) {
             e.preventDefault();
             const name = document.getElementById('projName').value;
@@ -331,7 +434,7 @@
             const required = parseInt(document.getElementById('projReqCount').value);
 
             projects.push({ id: Date.now(), name, location, required });
-            localStorage.setItem('ug_sec_projects', JSON.stringify(projects));
+            localStorage.setItem('ug_sec_projects_v2', JSON.stringify(projects));
             closeModal('projectModal');
             e.target.reset();
             renderAll();
@@ -346,8 +449,10 @@
                 category: document.getElementById('staffCategory').value,
                 projectName: document.getElementById('staffProject').value
             };
+            // Replace if ID already exists, or add new
+            staffList = staffList.filter(s => s.id !== staff.id);
             staffList.push(staff);
-            localStorage.setItem('ug_sec_staff', JSON.stringify(staffList));
+            localStorage.setItem('ug_sec_staff_v2', JSON.stringify(staffList));
             closeModal('staffModal');
             e.target.reset();
             renderAll();
@@ -364,22 +469,26 @@
                 status: "অমীমাংসিত/নজরদারিতে"
             };
             incidents.push(incident);
-            localStorage.setItem('ug_sec_incidents', JSON.stringify(incidents));
+            localStorage.setItem('ug_sec_incidents_v2', JSON.stringify(incidents));
             closeModal('incidentModal');
             e.target.reset();
             renderAll();
         }
 
         function deleteStaff(staffId) {
-            staffList = staffList.filter(s => s.id !== staffId);
-            localStorage.setItem('ug_sec_staff', JSON.stringify(staffList));
-            renderAll();
+            if(confirm('আপনি কি এই স্টাফকে ডিউটি থেকে সরাতে চান?')) {
+                staffList = staffList.filter(s => s.id !== staffId);
+                localStorage.setItem('ug_sec_staff_v2', JSON.stringify(staffList));
+                renderAll();
+            }
         }
 
         function deleteProject(projId) {
-            projects = projects.filter(p => p.id !== projId);
-            localStorage.setItem('ug_sec_projects', JSON.stringify(projects));
-            renderAll();
+            if(confirm('প্রজেক্টটি মুছে ফেললে এর সাথে সম্পর্কিত সব ডাটা মুছে যাবে। নিশ্চিত তো?')) {
+                projects = projects.filter(p => p.id !== projId);
+                localStorage.setItem('ug_sec_projects_v2', JSON.stringify(projects));
+                renderAll();
+            }
         }
 
         function renderAll() {
@@ -396,21 +505,26 @@
             document.getElementById('sidebar-proj-count').innerText = totalProj;
             document.getElementById('sidebar-staff-count').innerText = totalOnDuty;
 
-            const catTable = document.getElementById('category-table-body');
-            catTable.innerHTML = categories.map(cat => {
-                const reqForCat = Math.round(totalRequired / categories.length); 
-                const onDutyCat = staffList.filter(s => s.category === cat).length;
-                const shortageCat = Math.max(0, reqForCat - onDutyCat);
+            // Dashboard Project Table
+            const dashTable = document.getElementById('dashboard-project-table');
+            dashTable.innerHTML = projects.map(p => {
+                const pStaff = staffList.filter(s => s.projectName === p.name);
+                const shortage = Math.max(0, p.required - pStaff.length);
                 return `
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-3 font-medium text-slate-700">${cat}</td>
-                        <td class="p-3 text-blue-600 font-semibold">${reqForCat}</td>
-                        <td class="p-3 text-emerald-600 font-semibold">${onDutyCat}</td>
-                        <td class="p-3 text-rose-600 font-semibold">${shortageCat}</td>
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-3 font-bold text-blue-600 cursor-pointer hover:underline" onclick="openProjectDetail('${p.name}')">${p.name} <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></td>
+                        <td class="p-3 text-gray-500 text-xs">${p.location}</td>
+                        <td class="p-3 font-semibold text-slate-700">${p.required}</td>
+                        <td class="p-3 font-semibold text-emerald-600">${pStaff.length}</td>
+                        <td class="p-3 font-semibold text-rose-600">${shortage}</td>
+                        <td class="p-3 text-center">
+                            <button onclick="openProjectDetail('${p.name}')" class="bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded text-xs font-medium">বিস্তারিত</button>
+                        </td>
                     </tr>
                 `;
             }).join('');
 
+            // Projects Cards Grid (Tab 2)
             const projGrid = document.getElementById('projects-grid');
             projGrid.innerHTML = projects.map(p => {
                 const pStaff = staffList.filter(s => s.projectName === p.name);
@@ -419,14 +533,14 @@
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 space-y-4">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h3 class="font-bold text-lg text-slate-800">${p.name}</h3>
+                                <h3 class="font-bold text-lg text-slate-800 cursor-pointer hover:text-blue-600" onclick="openProjectDetail('${p.name}')">${p.name}</h3>
                                 <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot mr-1"></i>${p.location}</p>
                             </div>
                             <button onclick="deleteProject(${p.id})" class="text-gray-400 hover:text-rose-600 text-sm"><i class="fa-solid fa-trash"></i></button>
                         </div>
                         <div class="grid grid-cols-3 gap-2 bg-gray-50 p-3 rounded-lg text-center text-xs">
                             <div>
-                                <span class="text-gray-500 block">প্রয়োজনীয়</span>
+                                <span class="text-gray-500 block">অনুমোদিত</span>
                                 <span class="font-bold text-blue-600 text-base">${p.required}</span>
                             </div>
                             <div>
@@ -439,16 +553,16 @@
                             </div>
                         </div>
                         <div>
-                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">ডিউটিরত স্টাফ তালিকা:</h4>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">অন-ডিউটি গার্ড ও আইডি তালিকা:</h4>
                             <div class="space-y-2 max-h-40 overflow-y-auto pr-1">
                                 ${pStaff.length === 0 ? '<p class="text-xs text-gray-400 italic">কোনো স্টাফ অ্যাসাইন করা নেই</p>' : 
                                     pStaff.map(s => `
                                         <div class="flex justify-between items-center bg-gray-50 p-2 rounded text-xs border border-gray-100">
                                             <div>
-                                                <p class="font-semibold text-slate-800">${s.name} <span class="text-gray-400 font-normal">(${s.id})</span></p>
+                                                <p class="font-semibold text-slate-800">${s.name} <span class="text-blue-600 font-bold">(${s.id})</span></p>
                                                 <p class="text-gray-500">${s.category} • <i class="fa-solid fa-phone text-[10px]"></i> ${s.phone}</p>
                                             </div>
-                                            <button onclick="deleteStaff('${s.id}')" class="text-rose-500 hover:text-rose-700 px-1"><i class="fa-solid fa-xmark"></i></button>
+                                            <button onclick="deleteStaff('${s.id}')" class="text-rose-500 hover:text-rose-700 px-1" title="মুছে ফেলুন"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     `).join('')
                                 }
@@ -458,6 +572,7 @@
                 `;
             }).join('');
 
+            // Incidents Table
             const incTable = document.getElementById('incidents-table-body');
             incTable.innerHTML = incidents.length === 0 ? `<tr><td colspan="5" class="p-4 text-center text-gray-400">কোনো ইনসিডেন্ট রেকর্ড পাওয়া যায়নি</td></tr>` :
                 incidents.map(i => `
